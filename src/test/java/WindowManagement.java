@@ -18,19 +18,20 @@ public class WindowManagement {
     public void setUp(){
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        driver.manage().window().minimize();
         driver.get("https://practice.automationtesting.in/");
         System.out.println("Title: " + driver.getTitle());
     }
 
-    @AfterClass
-    public void tearDown(){
-        driver.quit();
-    }
+//    @AfterClass
+//    public void tearDown(){
+//        driver.quit();
+//    }
 
     @Test
     public void testNewWindowTab(){
         WebDriver newWindow = driver.switchTo().newWindow(WindowType.WINDOW);
+        driver.manage().window().minimize();
         newWindow.get("https://practice.automationtesting.in/shop/");
         System.out.println("Title: " + driver.getTitle());
     }
@@ -38,6 +39,7 @@ public class WindowManagement {
     @Test
     public void testWorkingInBothWindowTabs(){
         //Auto open e switch to new window or tab
+        driver.manage().window().minimize();
         driver.switchTo().newWindow(WindowType.TAB)
                 .get("https://practice.automationtesting.in/my-account/");
         System.out.println("Title: " + driver.getTitle());
@@ -56,7 +58,8 @@ public class WindowManagement {
 
         //Switch back to main window/tab
         driver.switchTo().window(mainFirstWindow);
-        driver.findElement(By.id("menu-item-50")).click();
+        driver.manage().window().maximize();
+        driver.findElement(By.id("menu-item-50")).isDisplayed();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         System.out.println("Title: " + driver.getTitle());
     }
