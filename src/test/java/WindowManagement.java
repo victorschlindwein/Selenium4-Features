@@ -3,6 +3,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WindowType;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -20,6 +21,11 @@ public class WindowManagement {
         driver.manage().window().maximize();
         driver.get("https://practice.automationtesting.in/");
         System.out.println("Title: " + driver.getTitle());
+    }
+
+    @AfterClass
+    public void tearDown(){
+        driver.quit();
     }
 
     @Test
